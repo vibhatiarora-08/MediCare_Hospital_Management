@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareTrack hospital visitor management demonstration project">
+  <title>MediCare | Hospital Visitor Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="script.js" defer></script>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="dashboard">
+        <span class="brand-mark">✚</span>
+        <span><strong>MediCare</strong><small>VISITOR MANAGEMENT</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-link" data-page="register"><span>＋</span> Register visitor</button>
+        <button class="nav-link" data-page="pass"><span>▤</span> Visitor pass</button>
+        <button class="nav-link" data-page="active"><span>◉</span> Active visitors</button>
+        <button class="nav-link" data-page="records"><span>☷</span> Visitor records</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">ⓘ</div>
+          <strong>Demo workspace</strong>
+          <p>Use sample information only. This prototype is not connected to a real hospital.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">MC</div>
+          <div><strong>Reception Desk</strong><small>Hospital staff</small></div>
+          <span class="profile-dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Dashboard</strong></div>
+        <div class="top-actions">
+          <span class="live-dot"></span><span class="top-status">System operational</span>
+          <div class="top-avatar">RD</div>
+        </div>
+      </header>
+
+      <section class="page active-page" id="page-dashboard">
+        <div class="page-heading">
+          <div><p class="eyebrow">OVERVIEW</p><h1>Good day, Reception Desk</h1><p class="subheading">Here's what's happening with hospital visitors today.</p></div>
+          <button class="primary-btn" data-go="register">＋ Register a visitor</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total visitors today</span><span class="stat-icon blue">♧</span></div><strong id="statTotal">0</strong><small class="muted">All registrations today</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Currently inside</span><span class="stat-icon green">◉</span></div><strong id="statActive">0</strong><small class="positive">Active visitor entries</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Checked out</span><span class="stat-icon purple">↗️</span></div><strong id="statExited">0</strong><small class="muted">Completed visits today</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Registered patients</span><span class="stat-icon amber">♙</span></div><strong id="statPatients">0</strong><small class="muted">Unique patient references</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel recent-panel">
+            <div class="panel-heading"><div><h2>Recent visitor activity</h2><p>Latest visitor registrations and updates</p></div><button class="text-btn" data-go="records">View all records →</button></div>
+            <div class="table-wrap"><table><thead><tr><th>VISITOR</th><th>PATIENT</th><th>ENTRY TIME</th><th>STATUS</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+          </section>
+          <section class="panel quick-panel">
+            <div class="panel-heading"><div><h2>Quick actions</h2><p>Common reception tasks</p></div></div>
+            <button class="quick-action" data-go="register"><span class="quick-symbol teal">＋</span><span><strong>New registration</strong><small>Register a hospital visitor</small></span><b>→</b></button>
+            <button class="quick-action" data-go="active"><span class="quick-symbol mint">◉</span><span><strong>Monitor visitors</strong><small>See who is currently inside</small></span><b>→</b></button>
+            <button class="quick-action" data-go="records"><span class="quick-symbol lavender">⌕</span><span><strong>Find a record</strong><small>Search visitor history</small></span><b>→</b></button>
+            <div class="note-box"><strong>Privacy reminder</strong><p>Use fictional details for this classroom demonstration. Avoid entering real patient or visitor information.</p></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="page" id="page-register">
+        <div class="page-heading"><div><p class="eyebrow">VISITOR SERVICES</p><h1>Register a visitor</h1><p class="subheading">Enter visitor and patient details to create a new visit record.</p></div></div>
+        <div class="form-layout">
+          <form class="panel form-panel" id="visitorForm">
+            <div class="form-section-title"><span class="section-number">01</span><div><h2>Visitor information</h2><p>Basic details of the person visiting</p></div></div>
+            <div class="form-grid">
+              <label>Visitor full name <em>*</em><input name="visitorName" required maxlength="70" placeholder="e.g. Aarav Sharma"></label>
+              <label>Contact number <em>*</em><input name="phone" required inputmode="tel" pattern="[0-9+() -]{7,18}" placeholder="e.g. 98765 43210"></label>
+              <label>Relationship with patient <em>*</em><select name="relationship" required><option value="">Select relationship</option><option>Parent</option><option>Spouse</option><option>Child</option><option>Sibling</option><option>Relative</option><option>Friend</option><option>Other</option></select></label>
+              <label>Visitor category<select name="category"><option>General visitor</option><option>Attendant</option><option>Caregiver</option></select></label>
+            </div>
+            <div class="form-section-title second"><span class="section-number">02</span><div><h2>Patient association</h2><p>Identify the patient being visited</p></div></div>
+            <div class="form-grid">
+              <label>Patient full name <em>*</em><input name="patientName" required maxlength="70" placeholder="e.g. Meera Sharma"></label>
+              <label>Patient ID <em>*</em><input name="patientId" required maxlength="24" placeholder="e.g. PT-1024"></label>
+              <label>Ward / room number <em>*</em><input name="ward" required maxlength="30" placeholder="e.g. Ward B - Room 204"></label>
+              <label>Visiting duration<select name="duration"><option value="30">30 minutes</option><option value="60" selected>1 hour</option><option value="90">1 hour 30 minutes</option><option value="120">2 hours</option></select></label>
+            </div>
+            <div class="form-footer"><span class="required-note"><em>*</em> Required fields</span><button class="primary-btn" type="submit">Create visitor pass <span>→</span></button></div>
+          </form>
+          <aside class="panel side-info"><div class="info-icon">✦</div><h3>Before you register</h3><ul><li>Verify the visitor's details with the reception record.</li><li>Confirm the correct patient and room information.</li><li>Issue a separate pass for each visitor.</li><li>Record the exit when the visit is complete.</li></ul><div class="info-foot">Demo note: all records are stored locally in this browser.</div></aside>
+        </div>
+      </section>
+
+      <section class="page" id="page-pass">
+        <div class="page-heading"><div><p class="eyebrow">VISITOR SERVICES</p><h1>Visitor pass</h1><p class="subheading">View and print a pass created during visitor registration.</p></div></div>
+        <div class="panel pass-search-panel"><label for="passSearch">Search by visitor name or pass ID</label><div class="search-line"><input id="passSearch" placeholder="e.g. Aarav Sharma or VC-..."><button class="primary-btn" id="findPass">Find pass</button></div></div>
+        <div id="passResult" class="pass-empty"><div class="empty-icon">▤</div><h3>No pass selected</h3><p>Search for a visitor to display their digital pass.</p></div>
+      </section>
+
+      <section class="page" id="page-active">
+        <div class="page-heading"><div><p class="eyebrow">LIVE MONITORING</p><h1>Active visitors</h1><p class="subheading">Monitor visitors who have not yet been checked out.</p></div><span class="live-label"><i></i> Live local records</span></div>
+        <div class="panel"><div class="panel-heading"><div><h2>Currently inside the hospital</h2><p id="activeCountText">0 active visits</p></div><div class="search-small"><span>⌕</span><input id="activeSearch" placeholder="Search active visitors"></div></div><div class="table-wrap"><table><thead><tr><th>VISITOR</th><th>PATIENT / ROOM</th><th>PASS ID</th><th>ENTRY TIME</th><th>EXPECTED DURATION</th><th>ACTION</th></tr></thead><tbody id="activeRows"></tbody></table></div><div class="empty-state hidden" id="activeEmpty">No active visitors at the moment.</div></div>
+      </section>
+
+      <section class="page" id="page-records">
+        <div class="page-heading"><div><p class="eyebrow">RECORDS</p><h1>Visitor records</h1><p class="subheading">Search and review all registered visitor entries.</p></div><button class="outline-btn" id="exportCsv">↓ Export CSV</button></div>
+        <div class="panel"><div class="records-toolbar"><div class="search-large"><span>⌕</span><input id="recordsSearch" placeholder="Search name, patient, pass ID or room..."></div><select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Inside">Inside</option><option value="Checked out">Checked out</option></select></div><div class="table-wrap"><table><thead><tr><th>PASS ID</th><th>VISITOR</th><th>PATIENT</th><th>ENTRY</th><th>EXIT</th><th>STATUS</th></tr></thead><tbody id="recordRows"></tbody></table></div><div class="empty-state hidden" id="recordsEmpty">No matching visitor records found.</div></div>
+      </section>
+
+      <footer class="footer"><span>© 2026 CareTrack · Academic demonstration prototype</span><span>Designed for responsible visitor coordination</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop hidden" id="passModal"><div class="modal"><button class="modal-close" id="closeModal" aria-label="Close">×</button><div id="modalContent"></div></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
